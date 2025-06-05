@@ -15,4 +15,4 @@ RUN python manage.py migrate
 # Expose port 8000 to make the application accessible
 EXPOSE 8000
 
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
