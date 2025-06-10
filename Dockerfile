@@ -6,13 +6,16 @@ WORKDIR /app
 
 # Copy all files from the current directory to the working directory in the container
 COPY . .
+COPY .env /app/.env
+
+
 
 # Install the dependencies listed in the requirements.txt file
 # Install the Migration of your Server 
+RUN apt-get update && apt-get install -y gcc
 RUN pip install -r requirements.txt
-RUN python manage.py migrate
 
 # Expose port 8000 to make the application accessible
 EXPOSE 8000
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
