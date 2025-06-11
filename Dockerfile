@@ -1,21 +1,15 @@
-# Use the Python 3.9 Slim image as the base for the container image
 FROM python:3.9-slim
 
-# Set the working directory inside the container to /.app
-WORKDIR /app 
+WORKDIR /app
 
-# Copy all files from the current directory to the working directory in the container
 COPY . .
 COPY .env /app/.env
 
-
-
-# Install the dependencies listed in the requirements.txt file
-# Install the Migration of your Server 
+RUN chmod +x ./entrypoint.sh
 RUN apt-get update && apt-get install -y gcc
+RUN apt-get update && apt-get install -y netcat
 RUN pip install -r requirements.txt
 
-# Expose port 8000 to make the application accessible
 EXPOSE 8000
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT ["./entrypoint.sh"]
