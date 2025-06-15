@@ -6,8 +6,8 @@ COPY . .
 COPY .env /app/.env
 
 RUN chmod +x ./entrypoint.sh
-RUN apt-get update && apt-get install -y gcc
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y gcc netcat-openbsd libpq-dev libffi-dev
+
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
