@@ -3,7 +3,6 @@ FROM python:3.9-slim
 WORKDIR /app
 
 COPY . .
-COPY .env /app/.env
 
 RUN chmod +x ./entrypoint.sh
 RUN apt-get update && apt-get install -y gcc netcat-openbsd libpq-dev libffi-dev
