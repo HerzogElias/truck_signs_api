@@ -16,6 +16,27 @@
 * [Useful Links](#useful_links)
 
 
+FOR Later 
+
+````
+docker run -d \
+--name trucksignsapi \
+--network trucksignsnetwork \
+-p 8200:8000 \
+--env-file truck_signs_designs/settings/.env \
+trucksignsapi
+```
+
+`````
+docker run -d \
+  --name db \
+  --env-file truck_signs_designs/settings/.env \
+  --network trucksignsnetwork \
+  postgres:13
+
+````
+
+
 
 ## Description
 
