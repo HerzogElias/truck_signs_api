@@ -22,7 +22,7 @@ FOR Later
 docker run -d \
 --name trucksignsapi \
 --network trucksignsnetwork \
--p 8200:8000 \
+-p 8020:8000 \
 --env-file truck_signs_designs/settings/.env \
 trucksignsapitest
 ```
