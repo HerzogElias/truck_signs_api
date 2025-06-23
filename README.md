@@ -24,7 +24,7 @@ docker run -d \
 --network trucksignsnetwork \
 -p 8200:8000 \
 --env-file truck_signs_designs/settings/.env \
-trucksignsapi
+trucksignsapitest
 ```
 
 `````
