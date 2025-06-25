@@ -19,6 +19,14 @@
 FOR Later 
 
 ````
+docker network create trucksignsnetwork
+```
+
+```
+docker build -t trucksignsapitest .
+```
+
+````
 docker run -d \
 --name trucksignsapi \
 --network trucksignsnetwork \
@@ -36,7 +44,7 @@ docker run -d \
 
 ````
 
-
+docker build -t trucksignsapitest . 
 
 ## Description
 
