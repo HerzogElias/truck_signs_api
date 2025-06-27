@@ -15,18 +15,37 @@
 * [Screenshots of the Django Backend Admin Panel](#screenshots)
 * [Useful Links](#useful_links)
 
+1. [Introduction](#Introduction)
+2. [Prerequisites](#Prerequisites)
+3. [Quickstart](#Quickstart)  
+   - [Clone GitHub Repository](#Clone-github-Resposiroty)  
+   - [Build Docker Image](#Build-Dockerimage)  
 
-FOR Later 
 
-````
-docker network create trucksignsnetwork
+
+
+### Build-Dockerimage
+1. Create a Docker Network. Use the following command: 
+```
+docker network create <trucksignsnetwork>
 ```
 
+2. Start the Prostgress DB. 
+```
+docker run -d \
+  --name db \
+  --env-file truck_signs_designs/settings/.env \
+  --network trucksignsnetwork \
+  postgres:13
+````
+
+3. Build the Docker Image. Use the following Command: 
 ```
 docker build -t trucksignsapitest .
 ```
 
-````
+4. Run the Docker image: 
+```
 docker run -d \
 --name trucksignsapi \
 --network trucksignsnetwork \
@@ -35,14 +54,7 @@ docker run -d \
 trucksignsapitest
 ```
 
-`````
-docker run -d \
-  --name db \
-  --env-file truck_signs_designs/settings/.env \
-  --network trucksignsnetwork \
-  postgres:13
 
-````
 
 docker build -t trucksignsapitest . 
 
