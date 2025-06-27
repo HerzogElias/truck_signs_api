@@ -22,7 +22,11 @@
    - [Build Docker Image](#Build-Dockerimage)  
 
 
-
+### Clone-github-Resposiroty
+1. Clone the folowoing Github Resposiroty 
+```
+https://github.com/herzogelias/truck_signs_api/
+```
 
 ### Build-Dockerimage
 1. Create a Docker Network. Use the following command: 
@@ -55,8 +59,6 @@ trucksignsapitest
 ```
 
 
-
-docker build -t trucksignsapitest . 
 
 ## Description
 
