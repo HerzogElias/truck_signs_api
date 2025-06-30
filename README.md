@@ -8,13 +8,26 @@
 </div>
 
 ## Table of Contents
+## Table of Contents
 1. [Introduction](#Introduction)
 2. [Prerequisites](#Prerequisites)
-3. [Quickstart](#Quickstart)  
-   - [Clone GitHub Repository](#Clone-github-Resposiroty)  
-   - [Build Docker Image](#Build-Dockerimage)  
-4. [Installation](#installation)
-5. [Usage](#Usage)
+3. [Quickstart](#Quickstart)
+   - [Clone GitHub Repository](#Clone-github-Resposiroty)
+   - [Build Docker Image](#Build-Dockerimage)
+4. [Description](#Descritpion)
+5. [Settings](#Settings)
+6. [Models](#Models)
+7. [Brief Explanation of the Views](#Brief-Explanation-of-the-Views)
+8. [Installation](#Installation)
+9. [Screenshots](#Screenshots-of-the-Django-Backend-Admin-Panel)
+   - [Mobile View](#Mobile-View)
+   - [Desktop View](#Desktop-View)
+10. [Useful Links](#Useful-Links)
+   - [Postgresql Database](#Postgresql-Database)
+   - [Docker](#Docker)
+   - [Django and DRF](#Django-and-DRF)
+   - [Miscellaneous](#Miscellaneous)
+
 
 
 ## Introduction 
@@ -31,55 +44,51 @@ To Deploy your Truck-Signs E-Commerce, you need the following:
 ### Clone-github-Resposiroty
 
 1. Clone the folowoing Github Resposiroty 
-```
+```bash
 https://github.com/herzogelias/truck_signs_api/
 ```
 
 ### Build-Dockerimage
 
 1. Create a Docker Network. Use the following command: 
+```bash
+docker network create <networkname>
 ```
-docker network create <trucksignsnetwork>
-```
-
 
 2. Start the Prostgress DB. 
-```
+```bash
 docker run -d \
   --name db \
   --env-file truck_signs_designs/settings/.env \
-  --network trucksignsnetwork \
+  --network <networkname> \
   postgres:13
-````
+```
 
 3. Build the Docker Image. Use the following Command: 
 ```
-docker build -t trucksignsapitest .
+docker build -t <imagename> .
 ```
 
 4. Run the Docker image: 
-```
+```bash
 docker run -d \
 --name trucksignsapi \
 --network trucksignsnetwork \
 -p 8020:8000 \
 --env-file truck_signs_designs/settings/.env \
-trucksignsapitest
+<imagename>
 ```
 
 
-
-
 ### Descritpion 
-
 __Signs for Trucks__ is an online store to buy pre-designed vinyls with custom lines of letters (often call truck letterings). The store also allows clients to upload their own designs and to customize them on the website as well. Aside from the vinyls that are the main product of the store, clients can also purchase simple lettering vinyls with no truck logo, a fire extinguisher vinyl, and/or a vinyl with only the truck unit number (or another number selected by the client).
 
-### Settings
 
+### Settings
 The __settings__ folder inside the trucks_signs_designs folder contains the different setting's configuration for each environment (so far the environments are development, docker testing, and production). Those files are extensions of the base.py file which contains the basic configuration shared among the different environments (for example, the value of the template directory location). In addition, the .env file inside this folder has the environment variables that are mostly sensitive information and should always be configured before use. By default, the environment in use is the decker testing. To change between environments modify the \_\_init.py\_\_ file.
 
-### Models
 
+### Models
 Most of the models do what can be inferred from their name. The following dots are notes about some of the models to make clearer their propose:
 - __Category Model:__ The category of the vinyls in the store. It contains the title of the category as well as the basic properties shared among products that belong to a same category. For example, _Truck Logo_ is a category for all vinyls that has a logo of a truck plus some lines of letterings (note that the vinyls are instances of the model _Product_). Another category is _Fire Extinguisher_, that is for all vinyls that has a logo of a fire extinguisher. 
 - __Lettering Item Category:__ This is the category of the lettering, for example: _Company Name_, _VIM NUMBER_, ... Each has a different pricing.
@@ -90,14 +99,13 @@ Most of the models do what can be inferred from their name. The following dots a
 
 To manage the payments, the payment gateway in use is [Stripe](https://stripe.com/).
 
-### Brief Explanation of the Views
+### Brief-Explanation-of-the-Views
 
 Most of the views are CBV imported from _rest_framework.generics_, and they allow the backend api to do the basic CRUD operations expected, and so they inherit from the _ListAPIView_, _CreateAPIView_, _RetrieveAPIView_, ..., and so on.
 
 The behavior of some of the views had to be modified to address functionalities such as creation of order and payment, as in this case, for example, both functionalities are implemented in the same view, and so a _GenericAPIView_ was the view from which it inherits. Another example of this is the _UploadCustomerImage_ View that takes the vinyl template uploaded by the clients and creates a new product based on it.
 
 ## Installation
-
 1. Clone the repo:
     ```bash
     git clone <INSERT URL>
@@ -117,13 +125,28 @@ The behavior of some of the views had to be modified to address functionalities 
         DB_PASSWORD
         DB_HOST
         DB_PORT
-        STRIPE_PUBLISHABLE_KEY
-        STRIPE_SECRET_KEY
-        EMAIL_HOST_USER
-        EMAIL_HOST_PASSWORD
+        POSTGRES_USER=
+        POSTGRES_PASSWORD=
+        POSTGRES_DB=
+        DJANGO_SUPERUSER_USERNAME=
+        DJANGO_SUPERUSER_EMAIL=
+        DJANGO_SUPERUSER_PASSWORD=
+        DOCKER_DB_NAME=
+        DOCKER_DB_USER=
+        DOCKER_DB_PASSWORD=
+        DOCKER_DB_HOST=
+        DOCKER_DB_PORT=
         ```
     1. For the database, the default configurations should be:
         ```bash
+        DOCKER_DB_NAME=trucksigns_db
+        DOCKER_DB_USER=trucksigns_user
+        DOCKER_DB_PASSWORD=supertrucksignsuser!
+        DOCKER_DB_HOST=db
+        DOCKER_DB_PORT=5432
+        POSTGRES_USER=trucksigns_user
+        POSTGRES_PASSWORD=supertrucksignsuser!
+        POSTGRES_DB=trucksigns_db
         DB_NAME=trucksigns_db
         DB_USER=trucksigns_user
         DB_PASSWORD=supertrucksignsuser!
@@ -139,17 +162,14 @@ The behavior of some of the views had to be modified to address functionalities 
 
     1. The EMAIL_HOST_USER and the EMAIL_HOST_PASSWORD are the credentials to send emails from the website when a client makes a purchase. This is currently disable, but the code to activate this can be found in views.py in the create order view as comments. Therefore, any valid email and password will work.
 
-1. Run the migrations and then the app:
-    ```bash
-    python manage.py migrate
-    python manage.py runserver
-    ```
+1. The migrations would like to run automaticly. 
 1. Congratulations =) !!! The App should be running in [localhost:8000](http://localhost:8000)
-1. (Optional step) To create a super user run:
-    ```bash
-    python manage.py createsuperuser
-    ```
-
+1. Superuser was automaticly Created. Data for the Superuser are configuarted in the following envivonment Variables: 
+```bash
+DJANGO_SUPERUSER_USERNAME=administrator
+DJANGO_SUPERUSER_EMAIL=admin@mail.de
+DJANGO_SUPERUSER_PASSWORD=administratorlidreifunfD4f!
+```
 
 __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Category__ Truck Sign, and then the __Product__ (can have any name). This is to make sure the frontend retrieves the Truck vinyls for display in the Product Grid as it only fetches the products of the category Truck Sign.
 
@@ -157,9 +177,8 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 
 <a name="screenshots"></a>
 
-## Screenshots of the Django Backend Admin Panel
-
-### Mobile View
+## Screenshots-of-the-Django-Backend-Admin-Panel
+### Mobile-View
 
 <div align="center">
 
@@ -168,7 +187,7 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 </div>
 ---
 
-### Desktop View
+### Desktop-View
 
 ![alt text](./screenshots/Admin_Panel_View.png)
 
@@ -183,9 +202,9 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 
 
 <a name="useful_links"></a>
-## Useful Links
+## Useful-Links
 
-### Postgresql Database
+### Postgresql-Database
 - Setup Database: [Digital Ocean Link for Django Deployment on VPS](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
 
 ### Docker
@@ -194,7 +213,7 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
     - Github repo of sunilale0: [Link](https://github.com/sunilale0/django-postgresql-gunicorn-nginx-dockerized/blob/master/README.md#nginx)
     - Michael Herman article on testdriven.io: [Link](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
 
-### Django and DRF
+### Django-and-DRF
 - [Django Official Documentation](https://docs.djangoproject.com/en/4.0/)
 - Generate a new secret key: [Stackoverflow Link](https://stackoverflow.com/questions/41298963/is-there-a-function-for-generating-settings-secret-key-in-django)
 - Modify the Django Admin:
