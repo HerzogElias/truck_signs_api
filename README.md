@@ -5,34 +5,43 @@
 # Signs for Trucks
 
 ![Python version](https://img.shields.io/badge/Pythn-3.8.10-4c566a?logo=python&&longCache=true&logoColor=white&colorB=pink&style=flat-square&colorA=4c566a) ![Django version](https://img.shields.io/badge/Django-2.2.8-4c566a?logo=django&&longCache=truelogoColor=white&colorB=pink&style=flat-square&colorA=4c566a) ![Django-RestFramework](https://img.shields.io/badge/Django_Rest_Framework-3.12.4-red.svg?longCache=true&style=flat-square&logo=django&logoColor=white&colorA=4c566a&colorB=pink)
-
-
 </div>
 
 ## Table of Contents
-* [Description](#description)
-* [Installation](#installation)
-* [Screenshots of the Django Backend Admin Panel](#screenshots)
-* [Useful Links](#useful_links)
-
 1. [Introduction](#Introduction)
 2. [Prerequisites](#Prerequisites)
 3. [Quickstart](#Quickstart)  
    - [Clone GitHub Repository](#Clone-github-Resposiroty)  
    - [Build Docker Image](#Build-Dockerimage)  
+4. [Installation](#installation)
+5. [Usage](#Usage)
 
 
+## Introduction 
+This is a Readme Description of our Truck-Signs E-Comerce. 
+
+## Prerequisites
+To Deploy your Truck-Signs E-Commerce, you need the following: 
+- VServer with Ubuntu
+- Python 3.8
+- Docker 
+
+
+## Quickstart
 ### Clone-github-Resposiroty
+
 1. Clone the folowoing Github Resposiroty 
 ```
 https://github.com/herzogelias/truck_signs_api/
 ```
 
 ### Build-Dockerimage
+
 1. Create a Docker Network. Use the following command: 
 ```
 docker network create <trucksignsnetwork>
 ```
+
 
 2. Start the Prostgress DB. 
 ```
@@ -60,7 +69,8 @@ trucksignsapitest
 
 
 
-## Description
+
+### Descritpion 
 
 __Signs for Trucks__ is an online store to buy pre-designed vinyls with custom lines of letters (often call truck letterings). The store also allows clients to upload their own designs and to customize them on the website as well. Aside from the vinyls that are the main product of the store, clients can also purchase simple lettering vinyls with no truck logo, a fire extinguisher vinyl, and/or a vinyl with only the truck unit number (or another number selected by the client).
 
