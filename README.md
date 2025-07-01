@@ -170,6 +170,9 @@ DJANGO_SUPERUSER_USERNAME=administrator
 DJANGO_SUPERUSER_EMAIL=admin@mail.de
 DJANGO_SUPERUSER_PASSWORD=administratorlidreifunfD4f!
 ```
+If you don’t set your own values, these defaults will be used automatically.
+If you prefer, you can specify your own credentials by setting these environment variables to custom values.
+
 
 __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Category__ Truck Sign, and then the __Product__ (can have any name). This is to make sure the frontend retrieves the Truck vinyls for display in the Product Grid as it only fetches the products of the category Truck Sign.
 
