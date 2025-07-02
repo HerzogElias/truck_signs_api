@@ -60,13 +60,13 @@ docker network create <networkname>
 docker run -d \
   --name db \
   --env-file truck_signs_designs/settings/.env \
-  --network <networkname> \
+  --network trucksignsnetwork \
   postgres:13
 ```
 
 3. Build the Docker Image. Use the following Command: 
 ```
-docker build -t <imagename> .
+docker build -t trucksigns .
 ```
 
 4. Run the Docker image: 
@@ -76,7 +76,7 @@ docker run -d \
 --network trucksignsnetwork \
 -p 8020:8000 \
 --env-file truck_signs_designs/settings/.env \
-<imagename>
+trucksigns
 ```
 
 
