@@ -163,7 +163,7 @@ The behavior of some of the views had to be modified to address functionalities 
     1. The EMAIL_HOST_USER and the EMAIL_HOST_PASSWORD are the credentials to send emails from the website when a client makes a purchase. This is currently disable, but the code to activate this can be found in views.py in the create order view as comments. Therefore, any valid email and password will work.
 
 1. The migrations would like to run automaticly. 
-1. Congratulations =) !!! The App should be running in [localhost:8000](http://localhost:8000)
+1. Congratulations =) !!! The App should be running in [localhost:8000](http://localhost:8020)
 1. Superuser was automaticly Created. Data for the Superuser are configuarted in the following envivonment Variables: 
 ```bash
 DJANGO_SUPERUSER_USERNAME=administrator
