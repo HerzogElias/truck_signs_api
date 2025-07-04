@@ -9,36 +9,39 @@
 
 
 ## Table of Contents
-1. [Introduction](#Introduction)
+1. [Descripton](#Descripton)
 2. [Prerequisites](#Prerequisites)
 3. [Quickstart](#Quickstart)
    - [Clone GitHub Repository](#Clone-github-Resposiroty)
    - [Build Docker Image](#Build-Dockerimage)
-4. [Description](#Descritpion)
-5. [Settings](#Settings)
-6. [Models](#Models)
-7. [Brief Explanation of the Views](#Brief-Explanation-of-the-Views)
-8. [Installation](#Installation)
-9. [Screenshots](#Screenshots-of-the-Django-Backend-Admin-Panel)
-   - [Mobile View](#Mobile-View)
-   - [Desktop View](#Desktop-View)
-10. [Useful Links](#Useful-Links)
-   - [Postgresql Database](#Postgresql-Database)
-   - [Docker](#Docker)
-   - [Django and DRF](#Django-and-DRF)
-   - [Miscellaneous](#Miscellaneous)
+4. [Usage](#Usage)
+    - [Placeholder](#Placeholder)
+    - [Settings](#Settings)
+    - [Models](#Models)
+    -[Brief Explanation of the Views](#Brief-Explanation-of-the-Views)
+    - [Installation](#Installation)
+    - [Screenshots](#Screenshots-of-the-Django-Backend-Admin-Panel)
+        - [Mobile View](#Mobile-View)
+        - [Desktop View](#Desktop-View)
+    -  [Useful Links](#Useful-Links)
+        - [Postgresql Database](#Postgresql-Database)
+        - [Docker](#Docker)
+        - [Django and DRF](#Django-and-DRF)
+        - [Miscellaneous](#Miscellaneous)
 
 
 
-## Introduction 
-This is a Readme Description of our Truck-Signs E-Comerce. 
+## Descripton 
+This is a README description of our Truck-Signs E-Commerce.
+The goal of this repository is to provide an online platform where customers can browse, customize, and purchase high-quality truck signs.
+It includes all the source code and resources necessary to run the application, manage the product catalog, handle orders, and process payments securely.
+
 
 ## Prerequisites
 To Deploy your Truck-Signs E-Commerce, you need the following: 
 - VServer with Ubuntu
 - Python 3.8
 - Docker 
-
 
 ## Quickstart
 ### Clone-github-Resposiroty
@@ -52,36 +55,74 @@ https://github.com/herzogelias/truck_signs_api/
 
 1. Create a Docker Network. Use the following command: 
 ```bash
-docker network create <networkname>
+docker network create <Networkname>
 ```
 
-2. Start the Prostgress DB. 
+2. Navigate to the correct directory:
+    ``` bash
+    cd truck_signs_api
+    ```
+3. Start the Prostgress DB. 
 ```bash
 docker run -d \
-  --name db \
+  --name <Containername> \
   --env-file truck_signs_designs/settings/.env \
-  --network trucksignsnetwork \
+  --network <Networkname> \
+  --restart always \ 
   postgres:13
 ```
 
-3. Build the Docker Image. Use the following Command: 
+4. Build the Docker Image. Use the following Command: 
 ```
-docker build -t trucksigns .
+docker build -t <Imagename> .
 ```
 
-4. Run the Docker image: 
+5. Run the Docker image: 
 ```bash
 docker run -d \
 --name trucksignsapi \
---network trucksignsnetwork \
+--network <Networkname> \
 -p 8020:8000 \
+--restart always \ 
 --env-file truck_signs_designs/settings/.env \
-trucksigns
+<Imagename>
+```
+
+5. Login to you Django Adminpanel: 
+Use the following Link and following Default Data from the env variables: 
+
+```bash
+<your-Ip-Adress>/admin
+```
+
+```bash
+DJANGO_SUPERUSER_USERNAME=administrator
+DJANGO_SUPERUSER_EMAIL=admin@mail.de
+DJANGO_SUPERUSER_PASSWORD=administratorlidreifunfD4f!
 ```
 
 
-### Descritpion 
-__Signs for Trucks__ is an online store to buy pre-designed vinyls with custom lines of letters (often call truck letterings). The store also allows clients to upload their own designs and to customize them on the website as well. Aside from the vinyls that are the main product of the store, clients can also purchase simple lettering vinyls with no truck logo, a fire extinguisher vinyl, and/or a vinyl with only the truck unit number (or another number selected by the client).
+## Usage
+
+### Placeholder
+
+You have the Folowing Placeholder in your Docker Build and Run Commands. 
+
+Imagename = The name of your Image. You can see that name with the command: 
+´´´ bash 
+docker images
+´´´
+
+Networkname = The name of your Created Docker Network. A list of all Docker Network in your VServer with the following Command: 
+´´´ bash 
+docker network ls 
+´´´
+
+Containername = This ist the name of the Container you run. 
+You can see this name with the following Command: 
+´´´bash 
+docker ps
+´´´
 
 
 ### Settings
@@ -105,10 +146,15 @@ Most of the views are CBV imported from _rest_framework.generics_, and they allo
 
 The behavior of some of the views had to be modified to address functionalities such as creation of order and payment, as in this case, for example, both functionalities are implemented in the same view, and so a _GenericAPIView_ was the view from which it inherits. Another example of this is the _UploadCustomerImage_ View that takes the vinyl template uploaded by the clients and creates a new product based on it.
 
-## Installation
+### Installation
 1. Clone the repo:
     ```bash
-    git clone <INSERT URL>
+    https://github.com/herzogelias/truck_signs_api/
+    ```
+
+1. Navigate to the correct directory:
+    ``` bash
+    cd truck_signs_api
     ```
 1. Configure a virtual env and set up the database. See [Link for configuring Virtual Environment](https://docs.python-guide.org/dev/virtualenvs/) and [Link for Database setup](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04).
 1. Configure the environment variables.
@@ -180,8 +226,8 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 
 <a name="screenshots"></a>
 
-## Screenshots-of-the-Django-Backend-Admin-Panel
-### Mobile-View
+### Screenshots-of-the-Django-Backend-Admin-Panel
+#### Mobile-View
 
 <div align="center">
 
@@ -190,7 +236,7 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 </div>
 ---
 
-### Desktop-View
+#### Desktop-View
 
 ![alt text](./screenshots/Admin_Panel_View.png)
 
@@ -205,18 +251,18 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 
 
 <a name="useful_links"></a>
-## Useful-Links
 
-### Postgresql-Database
+### Useful-Links
+#### Postgresql-Database
 - Setup Database: [Digital Ocean Link for Django Deployment on VPS](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
 
-### Docker
+#### Docker
 - [Docker Oficial Documentation](https://docs.docker.com/)
 - Dockerizing Django, PostgreSQL, guinicorn, and Nginx:
     - Github repo of sunilale0: [Link](https://github.com/sunilale0/django-postgresql-gunicorn-nginx-dockerized/blob/master/README.md#nginx)
     - Michael Herman article on testdriven.io: [Link](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
 
-### Django-and-DRF
+#### Django-and-DRF
 - [Django Official Documentation](https://docs.djangoproject.com/en/4.0/)
 - Generate a new secret key: [Stackoverflow Link](https://stackoverflow.com/questions/41298963/is-there-a-function-for-generating-settings-secret-key-in-django)
 - Modify the Django Admin:
@@ -226,7 +272,7 @@ __NOTE:__ To create Truck vinyls with Truck logos in them, first create the __Ca
 - More about Nested Serializers: [Stackoverflow Link](https://stackoverflow.com/questions/51182823/django-rest-framework-nested-serializers)
 - More about GenericViews: [Testdriver.io Link](https://testdriven.io/blog/drf-views-part-2/)
 
-### Miscellaneous
+#### Miscellaneous
 - Create Virual Environment with Virtualenv and Virtualenvwrapper: [Link](https://docs.python-guide.org/dev/virtualenvs/)
 - [Configure CORS](https://www.stackhawk.com/blog/django-cors-guide/)
 - [Setup Django with Cloudinary](https://cloudinary.com/documentation/django_integration)
