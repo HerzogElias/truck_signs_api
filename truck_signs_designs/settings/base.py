@@ -1,3 +1,5 @@
+import environ
+from .dev import *
 """
 Django settings for truck_signs_designs project.
 
@@ -155,3 +157,5 @@ MEDIA_ROOT = os.path.join(ROOT_BASE_DIR, 'media')
 # EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 # Activate Django-Heroku.
+
+ALLOWED_HOSTS= env("ALLOWED_HOSTS")
